@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 420px; margin: 40px auto; }
+    label { display: block; margin-top: 10px; font-size: 14px; }
+    input { width: 100%; padding: 6px; box-sizing: border-box; }
+    button { margin-top: 16px; padding: 8px 18px; }
+    .result { margin-top: 20px; font-size: 20px; font-weight: bold; color: #1a7f37; }
+    .error { margin-top: 20px; color: #c62828; }
+  </style>
+</head>
+<body>
+  <h2>{{ title }}</h2>
+  <form method="POST" action="/">
+    {% for key, label in fields %}
+      <label for="{{ key }}">{{ label }}</label>
+      <input type="number" step="any" id="{{ key }}" name="{{ key }}"
+             value="{{ values.get(key, '') }}" required>
+    {% endfor %}
+    <button type="submit">Predict</button>
+  </form>
+  {% if result %}<div class="result">{{ result }}</div>{% endif %}
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+</body>
+</html>
